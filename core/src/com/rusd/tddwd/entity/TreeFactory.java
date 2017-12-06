@@ -1,40 +1,49 @@
 package com.rusd.tddwd.entity;
 
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.rusd.tddwd.GlobalVaribles;
 import com.rusd.tddwd.body.BodyFactory;
 import com.rusd.tddwd.body.BodyOptions;
 import com.rusd.tddwd.body.CollisionBits;
+import com.rusd.tddwd.body.Shapes;
 import com.rusd.tddwd.entity.parts.Collidable;
+import com.rusd.tddwd.entity.parts.DrawablePart;
 import com.rusd.tddwd.entity.parts.Health;
 import com.rusd.tddwd.entity.parts.Inventory;
 import com.rusd.tddwd.entity.parts.Movable;
 
 public class TreeFactory {
 	
-	public static Entity create(World world, BodyOptions bo) {
+	public static Entity create( BodyOptions bo) {
 		
 		Entity ent = new Entity();		
 		Inventory inv = new Inventory();
-		inv.wood = 5;
+		inv.wood = 10;
 		ent.addPart(inv);
-		Health h= new Health();
-		ent.addPart(h);
-
+		ent.name = "Tree";
 		
-		ResourceCollision collidable = new ResourceCollision(inv,h);
+		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.get("tree.png",Texture.class));
+		
+		sprite.setSize(4, 4);
+		DrawablePart drawable = new DrawablePart(ent, sprite);
+		ent.addPart(drawable);
+		Health h= new Health();
+		h.health = Integer.MAX_VALUE; 
+		ent.addPart(h);
+		
+		ResourceInteracttion collidable = new ResourceInteracttion(inv,h);
 		ent.addPart(collidable);
 		
-		
-		
-				
 		bo.maskBits = CollisionBits.RESOURCE | CollisionBits.PLAYER | CollisionBits.ENEMY | CollisionBits.PROJECTILE;	
-//		bo.maskBits = CollisionBits.PROJECTILE;
 		bo.categoryBits = CollisionBits.RESOURCE;
-		bo.size = 3;
+		bo.size = 2;
 		bo.bodyType = BodyType.StaticBody;
 		bo.isSensor = false;
+		bo.shape = Shapes.SQUARE;
 		
 		Fixture fixture = BodyFactory.createBody(bo);
 		ent.fixture = fixture;		

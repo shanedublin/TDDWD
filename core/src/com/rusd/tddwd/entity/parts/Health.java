@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 public class Health implements Part {
 
 	public  int health = 1;
+	public int maxHealth = 1;
 	
 	public boolean alive(){
 		return health > 0;

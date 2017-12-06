@@ -48,12 +48,14 @@ import com.rusd.tddwd.body.GameContactListener;
 import com.rusd.tddwd.entity.EnemyFactory;
 import com.rusd.tddwd.entity.Entity;
 import com.rusd.tddwd.entity.ProjectileFactory;
-import com.rusd.tddwd.entity.ResourceCollision;
+import com.rusd.tddwd.entity.ResourceInteracttion;
 import com.rusd.tddwd.entity.RockFactory;
 import com.rusd.tddwd.entity.TreeFactory;
 import com.rusd.tddwd.entity.buildings.BuildingFactory;
+import com.rusd.tddwd.entity.parts.Buildable;
 import com.rusd.tddwd.entity.parts.Collidable;
 import com.rusd.tddwd.entity.parts.Health;
+import com.rusd.tddwd.entity.parts.Interactable;
 import com.rusd.tddwd.entity.parts.Inventory;
 import com.rusd.tddwd.entity.parts.Movable;
 import com.rusd.tddwd.entity.parts.Tool;
@@ -81,7 +83,7 @@ public class Main extends ApplicationAdapter {
 	List<Entity> enemies;
 	List<Entity> projectiles;
 	
-	BitmapFont font;
+	
 	
 	
 	long spawnRate = TimeUnit.SECONDS.toMillis(5);	
@@ -101,6 +103,8 @@ public class Main extends ApplicationAdapter {
 	
 	SelectionMode selectionMode;
 	Grid grid;
+	
+	GameInputHandler inputHandler;
 	
 	
 	@Override
@@ -129,15 +133,17 @@ public class Main extends ApplicationAdapter {
 		uiCam.update();
 		player =  PlayerFactory.createPlayer();
 //		randX*4 + 64 * xOffset
-		player.getBody().setTransform(new Vector2(256*1 + 256/2, 256*1 + 256/2), 0);
+		player.getBody().setTransform(new Vector2(256*1 + 256/2 -2, 256*1 + 256/2 -2), 0);
 		enemies = new ArrayList<>();
 		projectiles = new ArrayList<>();
 		
-		font = new BitmapFont();
 		gameMenu = new GameMenu();
 		
 		// world gen
 		generateChunk(3);
+		
+		inputHandler =  new GameInputHandler(this);
+		Gdx.input.setInputProcessor(inputHandler);
 	}
 
 	@Override
@@ -157,7 +163,7 @@ public class Main extends ApplicationAdapter {
 	}
 	
 	public void draw() {
-		Gdx.gl.glClearColor(87f/255,122f/255,30f/255, 1);
+//		Gdx.gl.glClearColor(87f/255,122f/255,30f/255, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		cam.update();
 		uiCam.update();
@@ -200,7 +206,7 @@ public class Main extends ApplicationAdapter {
 		String wood = "Wood: " + i.wood;
 		String rocks = "Rocks: " + i.rocks;
 		String guts = "Monster Guts: " + i.monsterGuts;
-		font.draw(uiBatch, wood  + "\n" + rocks + "\n" + guts ,8,Gdx.graphics.getHeight() -8);
+		GlobalVaribles.font.draw(uiBatch, wood  + "\n" + rocks + "\n" + guts ,8,Gdx.graphics.getHeight() -8);
 		if(paused) {			
 			drawMenu();
 		}
@@ -282,6 +288,8 @@ public class Main extends ApplicationAdapter {
 			Gdx.app.exit();
 		}
 		
+		
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 			switch (selectionMode) {
 				case ATTACK:
@@ -308,8 +316,7 @@ public class Main extends ApplicationAdapter {
 				if(Gdx.input.isButtonPressed(0)) {
 					if(grid.tileEmpty(mousePos)) {
 						grid.addEntityToGrid(BuildingFactory.createWall(mousePos), mousePos);
-					}
-					
+					}		
 					
 				}
 			}
@@ -346,17 +353,24 @@ public class Main extends ApplicationAdapter {
 				
 				@Override
 				public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-//					Gdx.app.log("Ray Casted Mother Fucer", fixture.getUserData().toString());
 					//RESOURCE LOGIC
 					Entity e =(Entity) fixture.getUserData();
-					Collidable part = e.getPart(Collidable.class);
-					if(part instanceof ResourceCollision) {
+//					Gdx.app.log("raycasted", e.toString());e
+					Interactable i = e.getPart(Interactable.class);
+					if(i != null) {
+						if(i instanceof Buildable) {
+							Buildable b = (Buildable) i;
+							if(b.buildPercentage() == 100) {
+								return 1;
+							}
+						}
+						
 						Tool t = player.getPart(Tool.class);							
 						if(TimeUtils.timeSinceMillis(t.lastFire) >= t.fireRate) {
 							rayCast = fixture.getBody().getPosition();
 							t.fire();
 							racastVisibleTime = 100;
-							((ResourceCollision) part).mineResources(1);;
+							i.interact(player);
 						}
 					}
 					

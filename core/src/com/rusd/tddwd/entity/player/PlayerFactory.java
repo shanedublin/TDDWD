@@ -29,11 +29,15 @@ public class PlayerFactory {
 		m.speed = 1000;
 		ent.addPart(m);
 		Weapon w = new Weapon();
+		w.fireRate = 100;
 		ent.addPart(w);
 		Tool t = new Tool();
 		ent.addPart(t);
 		
 		Inventory i = new Inventory();
+		i.wood = 1000;
+		i.rocks = 1000;
+		i.monsterGuts = 1000;
 		ent.addPart(i);
 		
 		ResourceSubscriber rs = new ResourceSubscriber(i);

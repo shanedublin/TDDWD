@@ -37,7 +37,7 @@ public class RockFactory {
 		h.health = Integer.MAX_VALUE; 
 		ent.addPart(h);
 		
-		ResourceCollision collidable = new ResourceCollision(inv,h);
+		ResourceInteracttion collidable = new ResourceInteracttion(inv,h);
 		ent.addPart(collidable);
 		
 		bo.maskBits = CollisionBits.RESOURCE | CollisionBits.PLAYER | CollisionBits.ENEMY | CollisionBits.PROJECTILE;	

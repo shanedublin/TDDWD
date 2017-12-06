@@ -4,35 +4,35 @@ import com.badlogic.gdx.Gdx;
 import com.rusd.tddwd.body.CollisionBits;
 import com.rusd.tddwd.entity.parts.Collidable;
 import com.rusd.tddwd.entity.parts.Health;
+import com.rusd.tddwd.entity.parts.Interactable;
 import com.rusd.tddwd.entity.parts.Inventory;
+import com.rusd.tddwd.entity.parts.Tool;
 import com.rusd.tddwd.events.EventHandler;
 import com.rusd.tddwd.events.GameEvent;
 import com.rusd.tddwd.events.ResourceEvent;
 import com.rusd.tddwd.events.ResourceEvent.ResourceType;
 
-public class ResourceCollision implements Collidable {
+public class ResourceInteracttion implements Interactable {
 	
 	
 	public Inventory inventory;
 	public Health health;
 	
 	
-	public ResourceCollision(Inventory inventory, Health health) {
+	public ResourceInteracttion(Inventory inventory, Health health) {
 		this.health = health;
 		this.inventory = inventory;
 		
 	}
 	
-
 	@Override
-	public void collides(Entity e) {
+	public void interact(Entity e) {
 		
-		if(e.fixture.getFilterData().categoryBits == CollisionBits.PROJECTILE) {
-			mineResources(1);
-		
-		}
+		Tool t = e.getPart(Tool.class);
+		mineResources(t.damage);
 		
 	}
+	
 	
 	public void mineResources(int i) {
 		if(inventory.rocks > 0) {

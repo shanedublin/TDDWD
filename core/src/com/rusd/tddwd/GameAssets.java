@@ -18,6 +18,10 @@ public class GameAssets  extends AssetManager{
 		this.load("rocks.png",Texture.class);	
 		this.load("palisade.png",Texture.class);	
 		this.load("selector.png",Texture.class);	
+		this.load("red.png",Texture.class);	
+		this.load("green.png",Texture.class);	
+		this.load("tree.png",Texture.class);	
+		
 		
 	
 	}

@@ -8,99 +8,91 @@ import com.rusd.tddwd.body.BodyOptions;
 import com.rusd.tddwd.entity.Entity;
 import com.rusd.tddwd.entity.RockFactory;
 import com.rusd.tddwd.entity.TreeFactory;
+import com.rusd.tddwd.entity.parts.Health;
 
 public class Chunk {
 	
 	
 	public Entity[][] tiles;
 	Vector2 basePos; 
+	public Grid grid;
 	
 	public Chunk(int xOffset, int yOffset, Grid grid) {
-		
+		this.grid = grid;
+		basePos = new Vector2(xOffset,yOffset);
 		
 		
 		tiles = new Entity[64][64];
 		
 		 
-		
-		if(xOffset== 1  && yOffset == 1) {
-//			 center of map do something else
-			for(int x = 0; x < 64; x ++) {
-				BodyOptions bo = new BodyOptions();
-				bo.pos.x = x * 4 + 256* xOffset;
-				bo.pos.y = 0 * 4 + 256* yOffset;				
-				Entity rock = RockFactory.create(bo);
-				tiles[x][0] = rock;
-				grid.entities.add(rock);
-				
-				bo = new BodyOptions();
-				bo.pos.x = x * 4 + 256 * xOffset;
-				bo.pos.y = 63 * 4 + 256 * yOffset;				
-				rock = RockFactory.create(bo);
-				tiles[x][63] = rock;
-				grid.entities.add(rock);
-				
-				bo = new BodyOptions();
-				bo.pos.x = 0 * 4 + 256 * xOffset;
-				bo.pos.y = x * 4 + 256 * yOffset;				
-				rock = RockFactory.create(bo);
-				tiles[0][x] = rock;
-				grid.entities.add(rock);
-				
-				bo = new BodyOptions();
-				bo.pos.x = 63 * 4 + 256 * xOffset;
-				bo.pos.y = x * 4 + 256* yOffset;				
-				rock = RockFactory.create(bo);
-				tiles[63][x] = rock;
-				grid.entities.add(rock);
-				
-			}
-			
-			
-			return;
-		}
-		
-//		for(int x = 0; x < 63; x++) {
-//			for(int y = 0; y < 63; y++) {
-//			BodyOptions bo = new BodyOptions();
-//			
-//			int randX = MathUtils.random(63);
-//			int randY = MathUtils.random(63);
-////			randX = i;
-////			randY = i;
-//			
-//			bo.pos.x = randX*4 + 64 * xOffset * 4;
-//			bo.pos.y = randY*4 + 64 * yOffset * 4;			
-//			
-//			Entity tree = RockFactory.create(world, bo);
-//			Gdx.app.log(randX+"", randY+"");
-//			tiles[randX][randY] = tree;
-//				
-//			}
-//			
-//		}
+	
 		
 		
-		for(int i = 0; i < 24; i++) {
-			BodyOptions bo = new BodyOptions();
-			
+		for(int i = 0; i < 256; i++) {			
 			int randX = MathUtils.random(63);
 			int randY = MathUtils.random(63);
-//			randX = i;
-//			randY = i;
-			
-			bo.pos.x = randX*4 + 64 * xOffset * 4;
-			bo.pos.y = randY*4 + 64 * yOffset * 4;			
-			
-			Entity rock = RockFactory.create(bo);
-			tiles[randX][randY] = rock;
-			grid.entities.add(rock);
+			if(tiles[randX][randY] != null) {
+				i --;
+				continue;
+			}			
+			createTree(randX, randY);
+		}
+		
+		for(int i = 0; i < 64; i++) {			
+			int randX = MathUtils.random(63);
+			int randY = MathUtils.random(63);
+			if(tiles[randX][randY] != null) {
+				i --;
+				continue;
+			}			
+			createRock(randX, randY);
 		}
 //		
 		
+		if(xOffset== 1  && yOffset == 1) {
+				createStartChunk();
+		}
 		
 	}
 	
+	
+	public void createStartChunk() {
+		
+		for(int i = 0; i < 64; i++) {
+			for(int j = 0; j < 64; j++) {
+				if(i >29 && i < 34 && j  > 29 && j < 34) {
+					Entity e = tiles[i][j];
+					if(e != null) {
+						Health h = e.getPart(Health.class);
+						h.health = 0;
+					}
+					
+				}
+			
+		}
+			
+		}
+		
+	}
+	public Entity createRock(int x , int y) {
+		BodyOptions bo = new BodyOptions();
+		bo.pos.x = x * 4 + 256* basePos.x;
+		bo.pos.y = y * 4 + 256* basePos.y;
+		Entity rock = RockFactory.create(bo);
+		tiles[x][y] = rock;
+		grid.entities.add(rock);
+		return rock;
+	}
+	public Entity createTree(int x, int y) {
+		BodyOptions bo = new BodyOptions();
+		bo.pos.x = x * 4 + 256* basePos.x;
+		bo.pos.y = y * 4 + 256* basePos.y;
+		Entity rock = TreeFactory.create(bo);
+		tiles[x][y] = rock;
+		grid.entities.add(rock);
+		return rock;
+		
+	}
 	
 	
 	

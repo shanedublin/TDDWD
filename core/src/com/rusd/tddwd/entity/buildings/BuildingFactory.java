@@ -12,7 +12,9 @@ import com.rusd.tddwd.body.BodyOptions;
 import com.rusd.tddwd.body.CollisionBits;
 import com.rusd.tddwd.body.Shapes;
 import com.rusd.tddwd.entity.Entity;
-import com.rusd.tddwd.entity.ResourceCollision;
+import com.rusd.tddwd.entity.ResourceInteracttion;
+import com.rusd.tddwd.entity.parts.Buildable;
+import com.rusd.tddwd.entity.parts.BuildingDrawable;
 import com.rusd.tddwd.entity.parts.DrawablePart;
 import com.rusd.tddwd.entity.parts.Health;
 import com.rusd.tddwd.entity.parts.Inventory;
@@ -30,19 +32,26 @@ public class BuildingFactory {
 		
 		
 		Entity ent = new Entity();		
+		ent.name ="wall";
 		Inventory inv = new Inventory();
 		inv.rocks = 3;
 		ent.addPart(inv);
 		
-		Health h= new Health();
-		ent.addPart(h);
+		Health health= new Health();
+		health.maxHealth = 10; 
+		ent.addPart(health);
 
+		Buildable b = new Buildable(10, 0, 0, health);
+		ent.addPart(b);
 		
 		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.get("palisade.png",Texture.class));
 		
 		sprite.setSize(4, 4);
-		DrawablePart drawable = new DrawablePart(ent, sprite);
-		ent.addPart(drawable);		
+		BuildingDrawable drawable = new BuildingDrawable(ent, sprite, b);
+		ent.addPart(drawable);
+		
+		
+		
 		
 		BodyOptions bo = new BodyOptions();
 		bo.pos = vector;
