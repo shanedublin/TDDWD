@@ -1,6 +1,6 @@
 package com.rusd.tddwd.entity.player;
 
-import com.rusd.tddwd.entity.parts.Inventory;
+import com.rusd.tddwd.entity.components.Inventory;
 import com.rusd.tddwd.events.GameEvent;
 import com.rusd.tddwd.events.ResourceEvent;
 import com.rusd.tddwd.events.Subscriber;

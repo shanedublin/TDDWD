@@ -10,13 +10,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.rusd.tddwd.UtilMethods;
 import com.rusd.tddwd.entity.Entity;
-import com.rusd.tddwd.entity.parts.DrawablePart;
-import com.rusd.tddwd.entity.parts.Health;
+import com.rusd.tddwd.entity.components.DrawableComponent;
+import com.rusd.tddwd.entity.components.Health;
 
 public class Grid  {
 	
 	
-	public List<Entity> entities = new ArrayList<>();
 	
 	Chunk[][] chunks;
 	
@@ -30,37 +29,11 @@ public class Grid  {
 		}		
 	}
 	
-	public void draw(SpriteBatch batch) {
-		
-		entities.stream().forEach(e -> {
-			DrawablePart dp = e.getPart(DrawablePart.class);
-			if(dp != null)
-				dp.draw(batch);
-		});
-		
-	}
 	
-	public void cleanse() {
-		
-		List<Entity> dead = entities.stream().filter(e ->{
-			Health h= e.getPart(Health.class);
-			return h.alive() == false;
-		}).collect(Collectors.toList());
-		
-		entities= entities.stream()				
-				.filter(UtilMethods::cleanseList)
-				.collect(Collectors.toList());
-		
-		dead.stream().forEach(e -> {
-			deleteEntity(e.getBody().getPosition());
-		});
-		
-		
-	}
 	
 	public void deleteEntity(Vector2 mousePos) {
 		ChunkInfo ci = new ChunkInfo(mousePos);
-		ci.setEntity(null);
+//		ci.setEntity(null);
 		
 	}
 	
@@ -71,22 +44,22 @@ public class Grid  {
 		
 		ChunkInfo ci = new ChunkInfo(mousePos);
 		
-		if(ci.getEntity() == null)
-			return true;
+//		if(ci.getEntity() == null)
+//			return true;
 		
 		return false;		
 	}
 	
 	
-	public void addEntityToGrid(Entity e, Vector2 mousePos) {
+	public void addEntityToGrid(int e, Vector2 mousePos) {
 		ChunkInfo ci = new ChunkInfo(mousePos);
 		int x = (((int)ci.mouseX)) / 4 * 4; 
 		int y = (((int)ci.mouseY)) / 4 * 4;
 		
-		e.getBody().setTransform(new Vector2(x,y), 0);
-				
-		ci.setEntity(e);	
-		entities.add(e);
+//		e.getBody().setTransform(new Vector2(x,y), 0);
+//				
+//		ci.setEntity(e);	
+//		entities.add(e);
 	}
 	
 	
@@ -111,11 +84,11 @@ public class Grid  {
 			return chunks[chunkX][chunkY];
 		}
 		
-		public Entity getEntity() {
+		public int getEntity() {
 			return getChunk().tiles[tileX][tileY];
 		}
 		
-		public void setEntity(Entity e) {
+		public void setEntity(int e) {
 			getChunk().tiles[tileX][tileY] = e;
 		}
 	}

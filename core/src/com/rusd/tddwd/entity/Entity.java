@@ -6,10 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.rusd.tddwd.entity.parts.Collidable;
-import com.rusd.tddwd.entity.parts.DrawablePart;
-import com.rusd.tddwd.entity.parts.Interactable;
-import com.rusd.tddwd.entity.parts.Part;
+import com.rusd.tddwd.entity.components.Collidable;
+import com.rusd.tddwd.entity.components.DrawableComponent;
+import com.rusd.tddwd.entity.components.Interactable;
+import com.rusd.tddwd.entity.components.Part;
 
 
 public class Entity {
@@ -33,9 +33,9 @@ public class Entity {
 			@SuppressWarnings("rawtypes")
 			Class cc = Collidable.class;
 			components.put(cc, c);
-		}else if(c instanceof DrawablePart) {
+		}else if(c instanceof DrawableComponent) {
 			@SuppressWarnings("rawtypes")
-			Class cc = DrawablePart.class;
+			Class cc = DrawableComponent.class;
 			components.put(cc, c);		
 		}else if(c instanceof Interactable) {
 			@SuppressWarnings("rawtypes")
