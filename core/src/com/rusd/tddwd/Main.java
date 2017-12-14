@@ -204,16 +204,9 @@ public class Main extends ApplicationAdapter {
 		}
 		
 		
-		mousePos.x = Gdx.input.getX();
-		mousePos.y = Gdx.input.getY();
-		Vector3 v3 =new Vector3(mousePos, 0);
+	
 		
 		
-//		v3 = cam.unproject(v3);
-//		mousePos.x =v3.x;
-//		mousePos.y =v3.y;
-		
-		trackMouseCursor();
 				
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			Gdx.app.exit();

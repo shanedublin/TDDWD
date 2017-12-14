@@ -16,8 +16,8 @@ public class DrawableComponent extends Component {
 	public Animation<TextureRegion> animation;
 	public float animTime;
 	
-	public int xOffset = -2;
-	public int yOffset = -2;
+	public float xOffset = -2;
+	public float yOffset = -2;
 	public String current;
 	public Map<String, TextureRegion> map = new HashMap<>(); 
 	

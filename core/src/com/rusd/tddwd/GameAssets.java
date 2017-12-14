@@ -32,6 +32,8 @@ public class GameAssets  extends AssetManager{
 		this.load("blob.png",Texture.class);	
 		this.load("dog.png",Texture.class);	
 		this.load("dog-sheet.png",Texture.class);	
+		this.load("item-log.png",Texture.class);	
+		this.load("item-rocks.png",Texture.class);	
 		
 		
 	

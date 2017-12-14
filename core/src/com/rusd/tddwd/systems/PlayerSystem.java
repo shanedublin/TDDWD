@@ -7,16 +7,20 @@ import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.rusd.tddwd.entity.components.DrawableComponent;
 import com.rusd.tddwd.entity.components.Physics;
 import com.rusd.tddwd.entity.components.Player;
 import com.rusd.tddwd.entity.components.Stats;
+import com.rusd.tddwd.entity.entity.items.ITEM;
+import com.rusd.tddwd.entity.entity.items.ItemFactory;
 
 public class PlayerSystem extends IteratingSystem {
 	
 	// TightlyCoupled..
 	DrawingSystem drawingSystem;
+	ItemFactory itemFactory;
 	
 
 	ComponentMapper<Player> playerInputMapper;
@@ -34,6 +38,10 @@ public class PlayerSystem extends IteratingSystem {
 	
 	@Override
 	protected void process(int entityId) {
+		
+		Player p = playerInputMapper.get(entityId);
+		trackMouseCursor(p);
+		
 		//TODO fix for multiplayer
 		Physics player = physicsMapper.get(entityId);
 		Stats stats = statsMapper.get(entityId);
@@ -63,6 +71,26 @@ public class PlayerSystem extends IteratingSystem {
 		}
 		drawingSystem.cam.position.x = pos.x;
 		drawingSystem.cam.position.y = pos.y;
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+			
+			itemFactory.CreateItem(ITEM.WOOD, p.mousePos);
+		}
+		
+	}
+
+
+
+
+	private void trackMouseCursor(Player p) {
+		p.mousePos.x = Gdx.input.getX();
+		p.mousePos.y = Gdx.input.getY();
+		Vector3 v3 =new Vector3(p.mousePos, 0);
+		
+		
+		v3 = drawingSystem.cam.unproject(v3);
+		p.mousePos.x =v3.x;
+		p.mousePos.y =v3.y;
 		
 	}
 

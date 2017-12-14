@@ -5,6 +5,7 @@ import com.artemis.WorldConfiguration;
 import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.PlayerManager;
 import com.badlogic.gdx.Gdx;
+import com.rusd.tddwd.entity.entity.items.ItemFactory;
 import com.rusd.tddwd.systems.DrawingSystem;
 import com.rusd.tddwd.systems.HealthSystem;
 import com.rusd.tddwd.systems.PlayerSystem;
@@ -23,7 +24,8 @@ public class ArtemisWorld extends World {
 						new DrawingSystem(),
 						new TreeFactory(),
 						new RockFactory(),
-						new PlayerSystem()
+						new PlayerSystem(),
+						new ItemFactory()
 						)
 				.build();
 	}

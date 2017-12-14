@@ -73,7 +73,7 @@ public class PlayerFactory  {
 		bo.pos = new Vector2(256*1 + 256/2 -2, 256*1 + 256/2 -2);
 		bo.density = 1;
 		bo.size = 1.0f;
-		bo.maskBits = CollisionBits.ENEMY | CollisionBits.RESOURCE;
+		bo.maskBits = CollisionBits.ENEMY | CollisionBits.RESOURCE | CollisionBits.ITEM;
 		bo.categoryBits = CollisionBits.PLAYER;
 		
 		

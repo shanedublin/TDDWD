@@ -12,7 +12,12 @@ import com.rusd.tddwd.entity.components.Player;
 import com.rusd.tddwd.entity.components.Stats;
 
 public class ArcheTypes {
-
+	
+	public Archetype item = new ArchetypeBuilder()
+			.add(DrawableComponent.class)
+			.add(Name.class)
+			.add(Physics.class)
+			.build(GlobalVaribles.artemisWorld);
 	
 	public Archetype resource = new ArchetypeBuilder()
 			.add(Health.class)
