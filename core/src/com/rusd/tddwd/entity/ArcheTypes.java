@@ -6,6 +6,7 @@ import com.rusd.tddwd.GlobalVaribles;
 import com.rusd.tddwd.entity.components.DrawableComponent;
 import com.rusd.tddwd.entity.components.Health;
 import com.rusd.tddwd.entity.components.Inventory;
+import com.rusd.tddwd.entity.components.Item;
 import com.rusd.tddwd.entity.components.Name;
 import com.rusd.tddwd.entity.components.Physics;
 import com.rusd.tddwd.entity.components.Player;
@@ -14,9 +15,11 @@ import com.rusd.tddwd.entity.components.Stats;
 public class ArcheTypes {
 	
 	public Archetype item = new ArchetypeBuilder()
+			.add(Health.class)
 			.add(DrawableComponent.class)
 			.add(Name.class)
 			.add(Physics.class)
+			.add(Item.class)
 			.build(GlobalVaribles.artemisWorld);
 	
 	public Archetype resource = new ArchetypeBuilder()

@@ -111,8 +111,9 @@ public class Main extends ApplicationAdapter {
 		sr = new ShapeRenderer();
 	
 		Gdx.app.log("Creating main Game", "HMMMMMM");
-		
-		GlobalVaribles.world.setContactListener(new GameContactListener());
+		GameContactListener gcl = new GameContactListener();
+		GlobalVaribles.artemisWorld.inject(gcl);
+		GlobalVaribles.world.setContactListener(gcl);
 				
 		gameMenu = new GameMenu();
 		hud = new HUD();

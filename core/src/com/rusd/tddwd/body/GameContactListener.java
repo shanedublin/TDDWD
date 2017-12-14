@@ -8,13 +8,20 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.rusd.tddwd.entity.Entity;
 import com.rusd.tddwd.entity.components.Collidable;
+import com.rusd.tddwd.entity.components.Item;
+import com.rusd.tddwd.systems.ItemContactSystem;
 
 public class GameContactListener implements ContactListener {
 	
-	
+	ItemContactSystem itemContactSystem;
 
 	@Override
 	public void beginContact(Contact contact) {
+		int a = (int) contact.getFixtureA().getUserData();
+		int b = (int) contact.getFixtureB().getUserData();
+		
+		itemContactSystem.handleContact(a, b);
+		
 //		Entity entityA = (Entity) contact.getFixtureA().getUserData();		
 //		Entity entityB = (Entity) contact.getFixtureB().getUserData();
 		

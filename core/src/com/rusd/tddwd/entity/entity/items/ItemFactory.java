@@ -13,6 +13,7 @@ import com.rusd.tddwd.body.CollisionBits;
 import com.rusd.tddwd.entity.components.DrawableComponent;
 import com.rusd.tddwd.entity.components.Health;
 import com.rusd.tddwd.entity.components.Inventory;
+import com.rusd.tddwd.entity.components.Item;
 import com.rusd.tddwd.entity.components.Name;
 import com.rusd.tddwd.entity.components.Physics;
 
@@ -23,6 +24,7 @@ public class ItemFactory extends BaseSystem {
 	ComponentMapper<Health> healthMapper;
 	ComponentMapper<DrawableComponent> drawMapper;
 	ComponentMapper<Physics> physicsMapper;
+	ComponentMapper<Item> itemMapper;
 	
 	public int CreateItem(ITEM item, Vector2 pos) {
 		
@@ -33,8 +35,12 @@ public class ItemFactory extends BaseSystem {
 		Name n = nameMapper.get(id);
 		n.name ="Item:" + id+  item.name;		
 		
+		Item i = itemMapper.get(id);
+		i.type = item;
 		
 		
+		Health h= healthMapper.get(id);
+		h.health = Integer.MAX_VALUE;
 		
 		
 		DrawableComponent drawable = drawMapper.get(id);
