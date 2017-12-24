@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class Weapon extends Component {
 	
-	public long fireRate = 100;
+	public long fireRate = 500;
 	public long lastFire = -500;
 	public void fire() {
 		lastFire = TimeUtils.millis();

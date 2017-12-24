@@ -20,17 +20,13 @@ public class ItemContactSystem extends BaseSystem {
 	
 	
 	public void handleContact(int a , int b) {
-		Gdx.app.log("Hmm",  itemMapper.get(a) + "");
-		Gdx.app.log("Hmm",  itemMapper.get(b) + "");
 		if(itemMapper.has(a)){			
-			Gdx.app.log("Contact", "ab" + a + b);
 			if(playerMapper.has(b)) {
 				depositItem(a, b);
 				
 			}			
 		}
 		if(itemMapper.has(b)) {			
-			Gdx.app.log("Contact", "ba");
 			if(playerMapper.has(a)) {
 				depositItem(b, a);
 			}

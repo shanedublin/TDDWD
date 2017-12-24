@@ -5,6 +5,7 @@ import com.artemis.Aspect.Builder;
 import com.artemis.BaseEntitySystem;
 import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -21,6 +22,7 @@ import com.rusd.tddwd.entity.components.Inventory;
 import com.rusd.tddwd.entity.components.Movable;
 import com.rusd.tddwd.entity.components.Name;
 import com.rusd.tddwd.entity.components.Physics;
+import com.rusd.tddwd.entity.components.SoundComponent;
 
 public class TreeFactory extends BaseSystem {
 	
@@ -31,26 +33,31 @@ public class TreeFactory extends BaseSystem {
 	ComponentMapper<Health> healthMapper;
 	ComponentMapper<DrawableComponent> drawMapper;
 	ComponentMapper<Physics> physicsMapper;
+	ComponentMapper<SoundComponent> soundMapper;
 	
 	
 	public int create( BodyOptions bo) {
 		
-		int tree = GlobalVaribles.artemisWorld.create(GlobalVaribles.archeTypes.resource);
+		int id = GlobalVaribles.artemisWorld.create(GlobalVaribles.archeTypes.resource);
 		
-		Inventory i = inventoryMapper.get(tree);
+		Inventory i = inventoryMapper.get(id);
 		i.wood = 10;
-		Name n = nameMapper.get(tree);
-		n.name ="ID:" + tree+  "Type: tree";
+		Name n = nameMapper.get(id);
+		n.name ="ID:" + id+  "Type: tree";
 		
-		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.get("tree.png",Texture.class));
+		Sprite sprite = GlobalVaribles.gameAssets.getSprite("tree");
 		sprite.setSize(4, 4);		
 		
-		DrawableComponent drawable = drawMapper.get(tree);
+		DrawableComponent drawable = drawMapper.get(id);
 		drawable.sprite = sprite;
+		
+		SoundComponent s = soundMapper.get(id);
+		s.sound = GlobalVaribles.gameAssets.get("bfxr/tree-chop.wav",Sound.class);
+		
 //		drawable.yOffset = -2;
 		
 		
-		Health h= healthMapper.get(tree);
+		Health h= healthMapper.get(id);
 		h.health = Integer.MAX_VALUE; 
 		
 //		ResourceInteracttion collidable = new ResourceInteracttion(inv,h);
@@ -66,12 +73,12 @@ public class TreeFactory extends BaseSystem {
 		
 		Fixture fixture = BodyFactory.createBody(bo);
 		
-		Physics p = physicsMapper.get(tree);
+		Physics p = physicsMapper.get(id);
 		p.fixture = fixture;
 		
-		fixture.setUserData(tree);
+		fixture.setUserData(id);
 		
-		return tree;	
+		return id;	
 	}
 
 

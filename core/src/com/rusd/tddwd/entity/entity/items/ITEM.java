@@ -1,9 +1,9 @@
 package com.rusd.tddwd.entity.entity.items;
 
 public enum ITEM {
-	WOOD("Wood",100,"item-log.png"),
-	ROCKS("Rocks",50,"item-rocks.png"),
-	MONSTER_GUTS("Monster Guts", Integer.MAX_VALUE,"monster-guts.png");
+	WOOD("Wood",100,"item-log"),
+	ROCKS("Rocks",50,"item-rocks"),
+	MONSTER_GUTS("Monster Guts", Integer.MAX_VALUE,"monster-guts");
 	
 	public final String name;
 	public final int stack;

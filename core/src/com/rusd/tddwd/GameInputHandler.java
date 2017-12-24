@@ -31,5 +31,10 @@ public class GameInputHandler extends InputAdapter {
 		
 		return super.scrolled(amount);
 	}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return super.touchDown(screenX, screenY, pointer, button);
+	}
 
 }

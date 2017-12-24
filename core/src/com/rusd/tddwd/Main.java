@@ -191,14 +191,14 @@ public class Main extends ApplicationAdapter {
 	public void input() {
 		racastVisibleTime -=10;
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			paused = !paused;
-			if(paused) {
-				selectionMode = SelectionMode.MENU;
-			}else {
-				selectionMode = SelectionMode.ATTACK;
-			}
-		}
+//		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+//			paused = !paused;
+//			if(paused) {
+//				selectionMode = SelectionMode.MENU;
+//			}else {
+//				selectionMode = SelectionMode.ATTACK;
+//			}
+//		}
 		
 		if(paused) {
 			return;			
@@ -253,20 +253,7 @@ public class Main extends ApplicationAdapter {
 			if(selectionMode != SelectionMode.ATTACK)
 				return;
 			
-//			Weapon w = player.getPart(Weapon.class);
-//			if(TimeUtils.timeSinceMillis(w.lastFire) >= w.fireRate) {
-//				w.fire();
-//				BodyOptions bo = new BodyOptions();
-//				bo.pos = new Vector2(pos.x,pos.y);
-//				bo.size = .1f;
-//				
-//				Entity projectile = ProjectileFactory.createProjectile(bo);
-//				Movable pM = projectile.getPart(Movable.class);
-//				Vector3 v =  new Vector3(mousePos.x-pos.x, mousePos.y-pos.y,0).nor().scl(pM.speed);
-//				
-//				projectile.getBody().setLinearVelocity(v.x,v.y);
-//				projectiles.add(projectile);
-//			}
+
 		}
 		
 		if(racastVisibleTime <=0)
@@ -306,12 +293,7 @@ public class Main extends ApplicationAdapter {
 		
 	}
 	
-	private void trackMouseCursor() {
-		// TODO Auto-generated method stub
-		int tileX = (((int)mousePos.x -2) / 4); 
-		int tileY = (((int)mousePos.y -2) / 4);
-//		selectorSprite.setPosition(tileX *4 +2, tileY * 4 +2);
-	}
+
 
 	@Override
 	public void resize(int width, int height) {

@@ -51,7 +51,7 @@ public class PlayerFactory  {
 		
 		DrawableComponent drawable = drawMapper.get(id);
 //		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.playerAnimation.getKeyFrame(drawable.animTime));
-		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.get("dog.png",Texture.class));
+		Sprite sprite = GlobalVaribles.gameAssets.getSprite("alien");
 		sprite.setSize(2, 2);		
 		drawable.sprite = sprite;
 		drawable.xOffset = -1;
@@ -73,6 +73,7 @@ public class PlayerFactory  {
 		bo.pos = new Vector2(256*1 + 256/2 -2, 256*1 + 256/2 -2);
 		bo.density = 1;
 		bo.size = 1.0f;
+		bo.linearDamping = 0;
 		bo.maskBits = CollisionBits.ENEMY | CollisionBits.RESOURCE | CollisionBits.ITEM;
 		bo.categoryBits = CollisionBits.PLAYER;
 		

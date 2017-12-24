@@ -45,7 +45,7 @@ public class ItemFactory extends BaseSystem {
 		
 		DrawableComponent drawable = drawMapper.get(id);
 //		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.playerAnimation.getKeyFrame(drawable.animTime));
-		Sprite sprite = new Sprite(GlobalVaribles.gameAssets.get(item.texture,Texture.class));
+		Sprite sprite = GlobalVaribles.gameAssets.getSprite(item.texture);
 		sprite.setSize(1, 1);		
 		drawable.sprite = sprite;
 		drawable.xOffset = -.5f;
