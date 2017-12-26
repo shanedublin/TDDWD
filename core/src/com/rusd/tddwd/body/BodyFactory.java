@@ -22,7 +22,9 @@ public class BodyFactory {
 		
 		bodyDef.position.set(bo.pos.x,bo.pos.y);
 		bodyDef.fixedRotation = true;
-		
+		bodyDef.angle = bo.angle;
+//		bodyDef.angle 
+//		bodyDef.angle = ;
 		
 		
 		Body body = GlobalVaribles.world.createBody(bodyDef);
@@ -35,6 +37,7 @@ public class BodyFactory {
 		fd.isSensor = bo.isSensor;
 		fd.filter.maskBits = bo.maskBits;
 		fd.filter.categoryBits = bo.categoryBits;
+		
 		
 		
 		Shape shape = null;

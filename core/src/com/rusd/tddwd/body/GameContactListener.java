@@ -14,6 +14,7 @@ import com.rusd.tddwd.systems.ItemContactSystem;
 public class GameContactListener implements ContactListener {
 	
 	ItemContactSystem itemContactSystem;
+	ProjectileContactSystem projectileContactSystem;
 
 	@Override
 	public void beginContact(Contact contact) {
@@ -21,14 +22,7 @@ public class GameContactListener implements ContactListener {
 		int b = (int) contact.getFixtureB().getUserData();
 		
 		itemContactSystem.handleContact(a, b);
-		
-//		Entity entityA = (Entity) contact.getFixtureA().getUserData();		
-//		Entity entityB = (Entity) contact.getFixtureB().getUserData();
-		
-//		Collidable cA = entityA.getPart(Collidable.class);
-//		Collidable cB = entityB.getPart(Collidable.class);
-//		if(cA != null) cA.collides(entityB);
-//		if(cB != null) cB.collides(entityA);
+		projectileContactSystem.handleContact(a, b);	
 
 		// TODO Auto-generated method stub
 		

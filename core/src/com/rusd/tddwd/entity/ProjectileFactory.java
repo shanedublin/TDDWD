@@ -22,6 +22,7 @@ import com.rusd.tddwd.entity.components.Movable;
 import com.rusd.tddwd.entity.components.Name;
 import com.rusd.tddwd.entity.components.Physics;
 import com.rusd.tddwd.entity.components.SoundComponent;
+import com.rusd.tddwd.entity.components.Stats;
 
 public class ProjectileFactory extends BaseSystem {
 
@@ -32,6 +33,8 @@ public class ProjectileFactory extends BaseSystem {
 	ComponentMapper<DrawableComponent> drawMapper;
 	ComponentMapper<Physics> physicsMapper;
 	ComponentMapper<SoundComponent> soundMapper;
+	ComponentMapper<Damage> damageMapper;
+	ComponentMapper<Stats> statsMapper;
 
 
 	public int createProjectile(BodyOptions bo) {
@@ -41,26 +44,34 @@ public class ProjectileFactory extends BaseSystem {
 		n.name ="ID:" + id+  "Type: projectile";
 		
 		Sprite sprite = GlobalVaribles.gameAssets.getSprite("laser");
-		sprite.setSize(2, 2);		
+		sprite.setSize(1, 1);
+		sprite.setOriginCenter();
+//		sprite.setOrigin(1, 1);
 				
 		
 		DrawableComponent drawable = drawMapper.get(id);
 		drawable.sprite = sprite;
+
+		Stats stats = statsMapper.get(id);
+		stats.speed = 50;
+		
+		Damage damage = damageMapper.get(id);
+		damage.amount = 1;
 		
 		SoundComponent s = soundMapper.get(id);
 		s.sound = GlobalVaribles.gameAssets.get("bfxr/laser.wav",Sound.class);
 		
-		drawable.yOffset = -1;
-		drawable.xOffset = -1;
+		drawable.yOffset = -.5f;
+		drawable.xOffset = -.5f;
 				
 //		ResourceInteracttion collidable = new ResourceInteracttion(inv,h);
 //		ent.addPart(collidable);
 		
 		bo.maskBits = CollisionBits.RESOURCE  | CollisionBits.ENEMY ;	
 		bo.categoryBits = CollisionBits.PROJECTILE;
-		bo.size = 1f;
+		bo.size = .5f;
 		
-		bo.bodyType = BodyType.KinematicBody;
+		bo.bodyType = BodyType.DynamicBody;
 		bo.isSensor = true;
 		bo.shape = Shapes.SQUARE;
 		

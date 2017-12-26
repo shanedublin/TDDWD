@@ -46,7 +46,9 @@ public class TreeFactory extends BaseSystem {
 		n.name ="ID:" + id+  "Type: tree";
 		
 		Sprite sprite = GlobalVaribles.gameAssets.getSprite("tree");
-		sprite.setSize(4, 4);		
+		sprite.setSize(4, 4);	
+//		sprite.setOrigin(-1, -1);
+		sprite.setOriginCenter();
 		
 		DrawableComponent drawable = drawMapper.get(id);
 		drawable.sprite = sprite;

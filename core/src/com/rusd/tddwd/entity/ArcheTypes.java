@@ -4,6 +4,7 @@ import com.artemis.Archetype;
 import com.artemis.ArchetypeBuilder;
 import com.badlogic.gdx.audio.Sound;
 import com.rusd.tddwd.GlobalVaribles;
+import com.rusd.tddwd.entity.components.Damage;
 import com.rusd.tddwd.entity.components.DrawableComponent;
 import com.rusd.tddwd.entity.components.Health;
 import com.rusd.tddwd.entity.components.Inventory;
@@ -55,6 +56,7 @@ public class ArcheTypes {
 			.add(Name.class)
 			.add(Physics.class)
 			.add(SoundComponent.class)
+			.add(Damage.class)
 			.build(GlobalVaribles.artemisWorld);
 	
 }

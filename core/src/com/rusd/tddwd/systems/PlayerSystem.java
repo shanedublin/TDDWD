@@ -6,7 +6,9 @@ import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -157,10 +159,12 @@ public class PlayerSystem extends IteratingSystem {
 			
 			BodyOptions bo = new BodyOptions();
 			bo.pos = new Vector2(pos.x,pos.y);
+			Vector3 v =  new Vector3(mousePos.x-pos.x, mousePos.y-pos.y,0).nor();
+			bo.angle = MathUtils.atan2(v.y, v.x) + (float) Math.PI/2; 
 			
 			int projectileID = projectileFactory.createProjectile(bo);
 			Stats stats = statsMapper.get(projectileID);
-			Vector3 v =  new Vector3(mousePos.x-pos.x, mousePos.y-pos.y,0).nor().scl(stats.speed);
+			v = v.scl(stats.speed);
 			
 			Physics projectilePhysics = physicsMapper.get(projectileID);
 			projectilePhysics.fixture.getBody().setLinearVelocity(v.x,v.y);

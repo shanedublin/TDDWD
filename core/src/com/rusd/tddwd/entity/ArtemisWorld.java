@@ -5,6 +5,7 @@ import com.artemis.WorldConfiguration;
 import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.PlayerManager;
 import com.badlogic.gdx.Gdx;
+import com.rusd.tddwd.body.ProjectileContactSystem;
 import com.rusd.tddwd.entity.entity.items.ItemFactory;
 import com.rusd.tddwd.systems.DrawingSystem;
 import com.rusd.tddwd.systems.HealthSystem;
@@ -35,7 +36,8 @@ public class ArtemisWorld extends World {
 						new PointContactSystem(),
 						new EnemyFactory(),
 						new ProjectileFactory(),
-						new TimerSystem()
+						new TimerSystem(),
+						new ProjectileContactSystem()
 						
 						)
 				.build();

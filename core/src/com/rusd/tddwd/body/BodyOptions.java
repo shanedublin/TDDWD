@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class BodyOptions {
 
-	public Vector2 pos = new Vector2(0,0);
+	public Vector2 pos = new Vector2(0, 0);
 	public float size = 1;
 	public float density = 1.0f;
 	public boolean isSensor = false;
@@ -21,5 +21,6 @@ public class BodyOptions {
 	public short categoryBits;
 	public float linearDamping = 5f;
 	public Shapes shape = Shapes.CIRCLE;
+	public float angle = 0;
 
 }
