@@ -11,10 +11,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.rusd.tddwd.entity.Entity;
 
-public class DrawableComponent extends Component {	
+public class DrawableComponent extends Component {
+	
+	
 	public Sprite sprite;
 	public Animation<TextureRegion> animation;
 	public float animTime;
+	public int layer = 100; 
 	
 	public float xOffset = -2;
 	public float yOffset = -2;

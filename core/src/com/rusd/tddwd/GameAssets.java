@@ -50,6 +50,9 @@ public class GameAssets  extends AssetManager{
 	public Sprite getSprite(String name) {
 		return atlas.createSprite(name);		
 	}
+	public Sprite getSprite(String name, int index) {
+		return atlas.createSprite(name,index);
+	}
 	
 	public void init() {
 		Gdx.app.log("Loading assets", "Start");		
@@ -57,7 +60,6 @@ public class GameAssets  extends AssetManager{
 		Gdx.app.log("Done Loading assets", "Finish");
 		
 		this.atlas = this.get("packed/game.atlas",TextureAtlas.class);
-		
 		
 //		Texture t = GlobalVaribles.gameAssets.get("blob.png",Texture.class);
 //		

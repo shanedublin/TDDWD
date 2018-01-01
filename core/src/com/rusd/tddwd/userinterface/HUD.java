@@ -21,6 +21,8 @@ Skin skin;
 	int buttonWidth = 270;
 	int buttonHeight = 60;
 	int padding = 9;
+
+	private Label l;
 	
 	public HUD() {
 		Gdx.input.setInputProcessor(this);
@@ -62,10 +64,14 @@ Skin skin;
 		String wood = "Wood: " + 5;
 		String rocks = "Rocks: " + 10;
 		String guts = "Monster Guts: " + 45;
-		Label l = new Label(wood + "\n" + rocks , labelStyle);
+		l = new Label(wood + "\n" + rocks , labelStyle);
 		table.add(l).expandX().align(Align.top);
 		table.setDebug(true);
 
+	}
+	public void update() {
+		l.setText("FPS: "+ Gdx.graphics.getFramesPerSecond());
+		
 	}
 
 }

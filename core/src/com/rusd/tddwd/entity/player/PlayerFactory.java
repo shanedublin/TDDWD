@@ -70,7 +70,7 @@ public class PlayerFactory  {
 //		ResourceInteracttion collidable = new ResourceInteracttion(inv,h);
 //		ent.addPart(collidable);
 		BodyOptions bo = new BodyOptions();
-		bo.pos = new Vector2(256*1 + 256/2 -2, 256*1 + 256/2 -2);
+		bo.pos = new Vector2(0, 0);
 		bo.density = 1;
 		bo.size = 1.0f;
 		bo.linearDamping = 0;
@@ -87,45 +87,7 @@ public class PlayerFactory  {
 		
 		return id;	
 		
-		
-//		Entity ent = new Entity();
-//		ent.name = "player";
-//		
-//		Health h = new Health();
-//		h.health = 10;
-//		ent.addPart(h);
-//		
-//		Movable m = new Movable();
-//		m.speed = 1000;
-//		ent.addPart(m);
-//		Weapon w = new Weapon();
-//		w.fireRate = 100;
-//		ent.addPart(w);
-//		Tool t = new Tool();
-//		ent.addPart(t);
-//		
-//		Inventory i = new Inventory();
-//		i.wood = 1000;
-//		i.rocks = 1000;
-//		i.monsterGuts = 1000;
-//		ent.addPart(i);
-//		
-//		ResourceSubscriber rs = new ResourceSubscriber(i);
-//		EventHandler.subscribe(rs);
-//		
-//		BodyOptions bo = new BodyOptions();
-//		bo.setTransform(new Vector2(256*1 + 256/2 -2, 256*1 + 256/2 -2), 0);
-//		bo.density = 1;
-//		bo.size = 1.8f;
-//		bo.maskBits = CollisionBits.ENEMY | CollisionBits.RESOURCE;
-//		bo.categoryBits = CollisionBits.PLAYER;
-//		
-//		Fixture fixture = BodyFactory.createBody(bo);
-//		ent.fixture = fixture;
-//		
-//		fixture.setUserData(ent);
-//		
-//		return ent;		
+	
 		
 	}
 }

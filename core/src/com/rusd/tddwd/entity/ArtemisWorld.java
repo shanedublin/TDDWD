@@ -14,6 +14,8 @@ import com.rusd.tddwd.systems.PlayerSystem;
 import com.rusd.tddwd.systems.PointContactSystem;
 import com.rusd.tddwd.systems.PointFactory;
 import com.rusd.tddwd.systems.RockFactory;
+import com.rusd.tddwd.systems.TileFactory;
+import com.rusd.tddwd.systems.TileSystem;
 import com.rusd.tddwd.systems.TimerSystem;
 import com.rusd.tddwd.systems.TreeFactory;
 
@@ -25,8 +27,9 @@ public class ArtemisWorld extends World {
 	static {
 		config = new WorldConfigurationBuilder()
 				.with(
-						new HealthSystem(),
+						new TileSystem(),
 						new DrawingSystem(),
+						new HealthSystem(),
 						new TreeFactory(),
 						new RockFactory(),
 						new PlayerSystem(),
@@ -37,7 +40,9 @@ public class ArtemisWorld extends World {
 						new EnemyFactory(),
 						new ProjectileFactory(),
 						new TimerSystem(),
-						new ProjectileContactSystem()
+						new ProjectileContactSystem(),
+						new TileFactory()
+						
 						
 						)
 				.build();

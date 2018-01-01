@@ -3,5 +3,8 @@ package com.rusd.tddwd.entity.components;
 import com.artemis.Component;
 
 public class Timer extends Component {
-	public float cooldown = 100;
+	/**
+	 * Time is seconds
+	 */
+	public float cooldown = .6f ;
 }

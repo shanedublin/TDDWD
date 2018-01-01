@@ -61,6 +61,8 @@ public class ProjectileFactory extends BaseSystem {
 		SoundComponent s = soundMapper.get(id);
 		s.sound = GlobalVaribles.gameAssets.get("bfxr/laser.wav",Sound.class);
 		
+		s.sound.play();
+		
 		drawable.yOffset = -.5f;
 		drawable.xOffset = -.5f;
 				

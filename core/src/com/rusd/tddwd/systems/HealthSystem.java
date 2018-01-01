@@ -3,6 +3,7 @@ package com.rusd.tddwd.systems;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.rusd.tddwd.GlobalVaribles;
 import com.rusd.tddwd.entity.components.Health;
 import com.rusd.tddwd.entity.components.Physics;

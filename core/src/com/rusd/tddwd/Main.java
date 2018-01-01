@@ -65,6 +65,7 @@ import com.rusd.tddwd.events.ResourceEvent.ResourceType;
 import com.rusd.tddwd.grid.Grid;
 import com.rusd.tddwd.systems.DrawingSystem;
 import com.rusd.tddwd.systems.RockFactory;
+import com.rusd.tddwd.systems.TileFactory;
 import com.rusd.tddwd.systems.TreeFactory;
 import com.rusd.tddwd.userinterface.GameMenu;
 import com.rusd.tddwd.userinterface.HUD;
@@ -99,6 +100,7 @@ public class Main extends ApplicationAdapter {
 	
 	// should be injected..
 	DrawingSystem drawingSystem;
+	TileFactory tileFactory;
 	
 	@Override
 	public void create () {
@@ -125,6 +127,7 @@ public class Main extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(inputHandler);
 		
 		GlobalVaribles.playerFactory.createPlayer();
+		
 	}
 
 	@Override
@@ -175,7 +178,8 @@ public class Main extends ApplicationAdapter {
 //		
 //		uiBatch.end();
 //		hud.act(Gdx.graphics.getDeltaTime());
-//		hud.draw();
+		hud.update();
+		hud.draw();
 		
 		
 	}

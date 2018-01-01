@@ -15,6 +15,8 @@ import com.rusd.tddwd.entity.components.Physics;
 import com.rusd.tddwd.entity.components.Player;
 import com.rusd.tddwd.entity.components.SoundComponent;
 import com.rusd.tddwd.entity.components.Stats;
+import com.rusd.tddwd.entity.components.TileComponent;
+import com.rusd.tddwd.entity.components.Timer;
 import com.rusd.tddwd.entity.components.Weapon;
 
 public class ArcheTypes {
@@ -41,6 +43,13 @@ public class ArcheTypes {
 			.add(SoundComponent.class)
 			.build(GlobalVaribles.artemisWorld);
 	
+	public Archetype tile = new ArchetypeBuilder()
+			.add(DrawableComponent.class)
+			.add(Name.class)
+			.add(SoundComponent.class)
+			.add(TileComponent.class)
+			.build(GlobalVaribles.artemisWorld);
+	
 	public Archetype player = new ArchetypeBuilder(resource)
 			.add(Player.class)
 			.add(Stats.class)
@@ -57,6 +66,7 @@ public class ArcheTypes {
 			.add(Physics.class)
 			.add(SoundComponent.class)
 			.add(Damage.class)
+			.add(Timer.class)
 			.build(GlobalVaribles.artemisWorld);
 	
 }

@@ -10,6 +10,7 @@ import com.rusd.tddwd.body.BodyOptions;
 import com.rusd.tddwd.entity.Entity;
 import com.rusd.tddwd.entity.components.Health;
 import com.rusd.tddwd.systems.RockFactory;
+import com.rusd.tddwd.systems.TileFactory;
 import com.rusd.tddwd.systems.TreeFactory;
 
 public class Chunk{
@@ -17,6 +18,7 @@ public class Chunk{
 	
 	TreeFactory treeFactory;
 	RockFactory rockFactory;
+	TileFactory tileFactory;
 	
 	public int[][] tiles;
 	Vector2 basePos; 
@@ -25,13 +27,23 @@ public class Chunk{
 	public Chunk(int xOffset, int yOffset, Grid grid) {
 		treeFactory = GlobalVaribles.artemisWorld.getSystem(TreeFactory.class);
 		rockFactory = GlobalVaribles.artemisWorld.getSystem(RockFactory.class);
+		tileFactory = GlobalVaribles.artemisWorld.getSystem(TileFactory.class);
+		
 		this.grid = grid;
 		basePos = new Vector2(xOffset,yOffset);
 		
 		
 		tiles = new int[64][64];
 		
+
+		
+		for(int i = 0; i < 64; i ++) {
+			for(int j = 0; j < 64; j++) {
+				fileTile(i, j);
+			}			
+		}
 		 
+		createTree(0, 0);
 	
 		
 		
@@ -81,6 +93,19 @@ public class Chunk{
 		}
 		
 	}
+	
+	public void fileTile(int x, int y) {
+		
+		x = (int) (x * 4 + 256* basePos.x);
+		y = (int) (y * 4 + 256* basePos.y);
+		
+		tileFactory.createTile(new Vector2(x,y),0,0);
+		tileFactory.createTile(new Vector2(x,y),1,0);
+		tileFactory.createTile(new Vector2(x,y),2,0);
+		tileFactory.createTile(new Vector2(x,y),3,0);
+		
+	}
+	
 	public int createRock(int x , int y) {
 		BodyOptions bo = new BodyOptions();
 		bo.pos.x = x * 4 + 256* basePos.x;
